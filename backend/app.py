@@ -115,6 +115,18 @@ def moderate():
     
     return jsonify({'response': ai_msg.content.lower()})
 
+@app.route('/learning_path', methods=['POST'])
+def learning_path():
+    data = request.json
+    message = data['message']
+    
+    llm = ChatGroq(model = "llama-3.1-8b-instant",api_key="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")
+    messages = [("system","Based on the users information classify them into one of these three paths they should learn. 1. Software Engineer 2. AI Engineer 3. Machine Learning. Respond with exactly the path name only, don't say anything else",),
+        ("human", message),]
+    ai_msg = llm.invoke(messages)
+    
+    return jsonify({'response': ai_msg.content.lower()})
+
 @app.route('/')
 def home():
     return 'Welcome to the Tech Dojo Backend API!'
