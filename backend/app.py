@@ -5,7 +5,7 @@ from langchain_groq import ChatGroq
 import sys
 from io import StringIO
 import os
-csv_path = os.path('tech-dojo/backend/cyberbullying_tweets.csv')
+csv_path = os.path.join('tech-dojo', 'backend', 'cyberbullying_tweets.csv')
 
 app = Flask(__name__)
 CORS(app, resources={
