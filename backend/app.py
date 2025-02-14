@@ -103,6 +103,18 @@ def run_code():
     output = execute_python_code(code)
     return jsonify({"output": output})
 
+@app.route('/api/moderate', methods=['POST'])
+def moderate():
+    data = request.json
+    message = data['message']
+    
+    llm = ChatGroq(model = "llama-3.1-8b-instant",api_key="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")
+    messages = [("system","The users message will be a message that will be posted on a forum. Respond in only one word either yes or no, do not say anything else no matter what. If the message doesn't constitute cyber bullying respond with yes if it does respond with no",),
+        ("human", message),]
+    ai_msg = llm.invoke(messages)
+    
+    return jsonify({'response': ai_msg.content})
+
 @app.route('/')
 def home():
     return 'Welcome to the Tech Dojo Backend API!'
