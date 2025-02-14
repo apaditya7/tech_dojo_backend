@@ -103,5 +103,9 @@ def run_code():
     output = execute_python_code(code)
     return jsonify({"output": output})
 
+@app.route('/')
+def home():
+    return 'Welcome to the Tech Dojo Backend API!'
+
 if __name__ == '__main__':
     app.run(port=5000)
